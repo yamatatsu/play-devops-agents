@@ -14,13 +14,6 @@ const stack = new cdk.Stack(app, "PlayDevopsAgentsStack", {
 const table = new dynamodb.TableV2(stack, "Table", {
 	partitionKey: { name: "pk", type: dynamodb.AttributeType.STRING },
 	sortKey: { name: "sk", type: dynamodb.AttributeType.STRING },
-	billing: dynamodb.Billing.provisioned({
-		readCapacity: dynamodb.Capacity.fixed(1),
-		writeCapacity: dynamodb.Capacity.autoscaled({
-			minCapacity: 1,
-			maxCapacity: 2,
-		}),
-	}),
 	removalPolicy: cdk.RemovalPolicy.DESTROY,
 });
 
