@@ -1,12 +1,15 @@
 import * as cdk from "aws-cdk-lib";
-import * as cw from "aws-cdk-lib/aws-cloudwatch";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
 import * as nodejs from "aws-cdk-lib/aws-lambda-nodejs";
 
 const app = new cdk.App();
-const stack = new cdk.Stack(app, "PlayDevopsAgentsStack");
+const stack = new cdk.Stack(app, "PlayDevopsAgentsStack", {
+	env: {
+		region: "us-east-1",
+	},
+});
 
 const table = new dynamodb.TableV2(stack, "Table", {
 	partitionKey: { name: "pk", type: dynamodb.AttributeType.STRING },
