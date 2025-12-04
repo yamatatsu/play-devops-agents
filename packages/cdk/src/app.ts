@@ -3,13 +3,15 @@ import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
 import * as nodejs from "aws-cdk-lib/aws-lambda-nodejs";
+import { DeployRoleStack } from "./stacks/deploy-role";
+
+const env = {
+	region: "us-east-1",
+};
 
 const app = new cdk.App();
-const stack = new cdk.Stack(app, "PlayDevopsAgentsStack", {
-	env: {
-		region: "us-east-1",
-	},
-});
+new DeployRoleStack(app, "PlayDevopsAgentsDeployRoleStack", { env });
+const stack = new cdk.Stack(app, "PlayDevopsAgentsStack", { env });
 
 // DynamoDB Tableを用意して
 const table = new dynamodb.TableV2(stack, "Table", {
@@ -24,7 +26,7 @@ const fn = new nodejs.NodejsFunction(stack, "Function", {
 		TABLE_NAME: table.tableName,
 	},
 });
-// table.grantReadWriteData(fn);
+table.grantReadWriteData(fn);
 
 // Lambdaを定期実行する
 const rule = new events.Rule(stack, "Rule", {
