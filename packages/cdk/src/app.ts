@@ -1,4 +1,5 @@
 import * as cdk from "aws-cdk-lib";
+import * as cw from "aws-cdk-lib/aws-cloudwatch";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as events from "aws-cdk-lib/aws-events";
 import * as targets from "aws-cdk-lib/aws-events-targets";
@@ -30,5 +31,9 @@ table.grantReadWriteData(fn);
 const rule = new events.Rule(stack, "Rule", {
 	schedule: events.Schedule.rate(cdk.Duration.minutes(1)),
 });
-
 rule.addTarget(new targets.LambdaFunction(fn));
+
+fn.metricErrors().createAlarm(stack, "FunctionErrorAlarm", {
+	threshold: 1,
+	evaluationPeriods: 1,
+});
