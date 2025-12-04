@@ -26,7 +26,7 @@ const fn = new nodejs.NodejsFunction(stack, "Function", {
 		TABLE_NAME: table.tableName,
 	},
 });
-table.grantReadWriteData(fn);
+// table.grantReadWriteData(fn);
 
 // Lambdaを定期実行する
 const rule = new events.Rule(stack, "Rule", {
