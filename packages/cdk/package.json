@@ -1,0 +1,16 @@
+{
+	"name": "@play-devops-agents/cdk",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"aws-cdk": "^2.1031.2",
+		"aws-cdk-lib": "^2.223.0",
+		"constructs": "^10.4.3",
+		"esbuild": "^0.27.0"
+	},
+	"dependencies": {
+		"@aws-sdk/client-dynamodb": "^3.930.0",
+		"@aws-sdk/lib-dynamodb": "^3.930.0"
+	}
+}

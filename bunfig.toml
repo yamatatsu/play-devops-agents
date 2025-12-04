@@ -1,0 +1,4 @@
+[install]
+minimumReleaseAge = 1814400 # 21days
+
+security.scanner = "@bun-security-scanner/osv"
