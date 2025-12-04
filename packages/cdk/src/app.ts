@@ -11,12 +11,14 @@ const stack = new cdk.Stack(app, "PlayDevopsAgentsStack", {
 	},
 });
 
+// DynamoDB Tableを用意して
 const table = new dynamodb.TableV2(stack, "Table", {
 	partitionKey: { name: "pk", type: dynamodb.AttributeType.STRING },
 	sortKey: { name: "sk", type: dynamodb.AttributeType.STRING },
 	removalPolicy: cdk.RemovalPolicy.DESTROY,
 });
 
+// Tableにデータを書き込むLambdaを用意して
 const fn = new nodejs.NodejsFunction(stack, "Function", {
 	environment: {
 		TABLE_NAME: table.tableName,
@@ -24,11 +26,13 @@ const fn = new nodejs.NodejsFunction(stack, "Function", {
 });
 // table.grantReadWriteData(fn);
 
+// Lambdaを定期実行する
 const rule = new events.Rule(stack, "Rule", {
 	schedule: events.Schedule.rate(cdk.Duration.minutes(1)),
 });
 rule.addTarget(new targets.LambdaFunction(fn));
 
+// Lambdaのエラーにアラームをセット
 fn.metricErrors().createAlarm(stack, "FunctionErrorAlarm", {
 	threshold: 1,
 	evaluationPeriods: 1,
