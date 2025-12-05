@@ -14,15 +14,18 @@
     },
     "packages/cdk": {
       "name": "@play-devops-agents/cdk",
-      "dependencies": {
-        "@aws-sdk/client-dynamodb": "^3.930.0",
-        "@aws-sdk/lib-dynamodb": "^3.930.0",
-      },
       "devDependencies": {
         "aws-cdk": "^2.1031.2",
         "aws-cdk-lib": "^2.223.0",
         "constructs": "^10.4.3",
         "esbuild": "^0.27.0",
+      },
+    },
+    "packages/lambda": {
+      "name": "@play-devops-agents/lambda",
+      "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.930.0",
+        "@aws-sdk/lib-dynamodb": "^3.930.0",
       },
     },
   },
@@ -172,6 +175,8 @@
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.27.0", "", { "os": "win32", "cpu": "x64" }, "sha512-aIitBcjQeyOhMTImhLZmtxfdOcuNRpwlPNmlFKPcHQYPhEssw75Cl1TSXJXpMkzaua9FUetx/4OQKq7eJul5Cg=="],
 
     "@play-devops-agents/cdk": ["@play-devops-agents/cdk@workspace:packages/cdk"],
+
+    "@play-devops-agents/lambda": ["@play-devops-agents/lambda@workspace:packages/lambda"],
 
     "@smithy/abort-controller": ["@smithy/abort-controller@4.2.5", "", { "dependencies": { "@smithy/types": "^4.9.0", "tslib": "^2.6.2" } }, "sha512-j7HwVkBw68YW8UmFRcjZOmssE77Rvk0GWAIN1oFBhsaovQmZWYCIcGa9/pwRB0ExI8Sk9MWNALTjftjHZea7VA=="],
 

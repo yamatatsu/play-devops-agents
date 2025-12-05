@@ -22,6 +22,7 @@ const table = new dynamodb.TableV2(stack, "Table", {
 
 // Tableにデータを書き込むLambdaを用意して
 const fn = new nodejs.NodejsFunction(stack, "Function", {
+	entry: "../lambda/src/index.ts",
 	environment: {
 		TABLE_NAME: table.tableName,
 	},
