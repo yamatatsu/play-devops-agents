@@ -1,5 +1,5 @@
 export const createNewItem = () => ({
-	id: "1",
+	pk: "1",
 	sk: new Date().toISOString(),
 	val: Math.random() * 100,
 });
